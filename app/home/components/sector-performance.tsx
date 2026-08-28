@@ -51,8 +51,3 @@ export default function SectorPerformance() {
     </Grid>
   );
 }
-
-export async function getServerSideProps() {
-  const data = await api.fetchSectorPerformance();
-  return {props: {data}}
-}

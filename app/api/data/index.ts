@@ -1,5 +1,5 @@
 import {LoremIpsum} from "lorem-ipsum";
-import { random} from "es-toolkit";
+import {random} from "es-toolkit";
 
 const lorem = new LoremIpsum();
 const nextRandom = () => random(-5, 5);
@@ -63,15 +63,19 @@ export type IndicePerfType = {
 
 function createIndicesPerformance(): IndicePerfType[] {
   return [
-  {position: 6, change: nextRandom(), points: nextPoints(), indice: 'S&P 500'},
-  {position: 7, change: nextRandom(), points: nextPoints(), indice: 'Nikkei 225'},
-  {position: 39, change: nextRandom(), points: nextPoints(), indice: 'DAX'},
-  {position: 56, change:nextRandom(), points: nextPoints(), indice: 'FTSE 100'},
-  {position: 58, change: nextRandom(), points: nextPoints(), indice: 'Stoxx 50'},
-];
+    {position: 6, change: nextRandom(), points: nextPoints(), indice: 'S&P 500'},
+    {position: 7, change: nextRandom(), points: nextPoints(), indice: 'Nikkei 225'},
+    {position: 39, change: nextRandom(), points: nextPoints(), indice: 'DAX'},
+    {position: 56, change: nextRandom(), points: nextPoints(), indice: 'FTSE 100'},
+    {position: 58, change: nextRandom(), points: nextPoints(), indice: 'Stoxx 50'},
+    {position: 58, change: nextRandom(), points: nextPoints(), indice: 'IBEX 35'},
+    {position: 58, change: nextRandom(), points: nextPoints(), indice: 'ASX 200'},
+    {position: 58, change: nextRandom(), points: nextPoints(), indice: 'Shanghai Composite'},
+    {position: 58, change: nextRandom(), points: nextPoints(), indice: 'KOSPI'},
+  ];
 }
 
-export default  {
+export default {
   fetchTopNews: async () => createTopNews(),
   fetchMarketPerformance: async () => createMarketPerformance(),
   fetchSectorPerformance: async () => createSectorPerformance(),

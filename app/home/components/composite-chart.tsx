@@ -4,7 +4,7 @@ import {CompositeChart, LineChart} from '@mantine/charts';
 export function CustomBarChart() {
   return (
     <CompositeChart
-      h={300}
+      h={350}
       data={data}
       dataKey="date"
       xAxisLabel="Date"

@@ -1,8 +1,9 @@
 import '@mantine/core/styles.css';
 import '@mantine/charts/styles.css';
+import '@mantine/carousel/styles.css';
 
 import React from 'react';
-import {ColorSchemeScript, mantineHtmlProps, MantineProvider} from '@mantine/core';
+import {ColorSchemeScript, Grid, mantineHtmlProps, MantineProvider} from '@mantine/core';
 import {theme} from '@/theme';
 import Header from "@/app/shared/header";
 import Home from "@/app/home";
@@ -26,10 +27,14 @@ export default function RootLayout({children}: { children: any }) {
     <body>
 
     <MantineProvider theme={theme}>
-      <div>&nbsp;</div>
-      <Header/>
-      <div>&nbsp;</div>
-      {children}</MantineProvider>
+      {children}
+      {/*<Grid>*/}
+      {/*<Grid.Col span={1}></Grid.Col>*/}
+      {/*<Grid.Col span={10}>*/}
+      {/*  */}
+      {/*</Grid.Col>*/}
+      {/*</Grid>*/}
+      </MantineProvider>
     </body>
     </html>
   );
