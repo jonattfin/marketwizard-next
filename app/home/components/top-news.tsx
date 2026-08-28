@@ -1,10 +1,20 @@
 import {Table} from '@mantine/core';
-import { LoremIpsum } from "lorem-ipsum";
-
-const lorem = new LoremIpsum();
+import api, {TopNewsType} from '@/app/api/data'
+import {useEffect, useState} from "react";
 
 export default function TopNews() {
-  const rows = elements.map((element) => (
+  const [data, setData] = useState<TopNewsType[]>([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const d = await api.fetchTopNews();
+      setData(d);
+    }
+
+    fetchData().catch((err) => console.error(err));
+  }, []);
+
+  const rows = data?.map((element) => (
     <Table.Tr key={element.id}>
       <Table.Td>{element.headline}</Table.Td>
       <Table.Td>{element.source}</Table.Td>
@@ -23,11 +33,3 @@ export default function TopNews() {
     </Table>
   );
 }
-
-const elements = [
-  {source: 'C', headline: lorem.generateWords(10), id: 1,},
-  {source: 'N', headline: lorem.generateWords(10), id: 2,},
-  {source: 'Y', headline: lorem.generateWords(10), id: 3},
-  {source: 'Ba', headline: lorem.generateWords(10), id: 4,},
-  {source: 'Ce', headline: lorem.generateWords(10), id: 5,},
-];

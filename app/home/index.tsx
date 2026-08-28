@@ -3,11 +3,11 @@
 import {Grid, Accordion, Stack} from '@mantine/core';
 import {IconPhoto, IconPrinter, IconCameraSelfie} from '@tabler/icons-react';
 import IndicesTable from "@/app/home/components/indices-table";
-import {Demo} from "@/app/demo";
-import TopNewsTable from "@/app/home/components/top-news";
-import TopNews from "@/app/home/components/top-news";
-import SectorPerformance from "@/app/home/components/sector-performance";
+
 import MarketPerformance from "@/app/home/components/market-performance";
+import {CustomBarChart} from "@/app/home/components/bar-chart";
+import SectorPerformance from "@/app/home/components/sector-performance";
+import TopNews from "@/app/home/components/top-news";
 
 export default function Home() {
   return (
@@ -16,7 +16,7 @@ export default function Home() {
       <Grid.Col span={10}>
         <Stack>
           <Grid>
-            <Grid.Col span={9}><Demo/></Grid.Col>
+            <Grid.Col span={9}><CustomBarChart/></Grid.Col>
             <Grid.Col span={3}><IndicesTable/></Grid.Col>
           </Grid>
           <Grid>
@@ -42,14 +42,13 @@ function AccordionSection() {
         <Accordion.Control icon={<IconPhoto size={20} color="var(--mantine-color-red-6)"/>}>
           Today's performance by sector
         </Accordion.Control>
-        <Accordion.Panel><SectorPerformance/>
-        </Accordion.Panel>
+        <Accordion.Panel><SectorPerformance/></Accordion.Panel>
       </Accordion.Item>
       <Accordion.Item value="print">
         <Accordion.Control icon={<IconPrinter size={20} color="var(--mantine-color-blue-6)"/>}>
           Today's top news
         </Accordion.Control>
-        <Accordion.Panel><TopNewsTable/></Accordion.Panel>
+        <Accordion.Panel><TopNews/></Accordion.Panel>
       </Accordion.Item>
       <Accordion.Item value="camera">
         <Accordion.Control

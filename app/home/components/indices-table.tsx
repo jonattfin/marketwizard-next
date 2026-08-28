@@ -1,13 +1,29 @@
-"use client";
-import {Table, Switch, Badge} from '@mantine/core';
+import {Table, Switch, NumberFormatter} from '@mantine/core';
+import PerformanceBadge from "@/app/shared/perf-badge";
+import api, {IndicePerfType} from "@/app/api/data";
+import {useEffect, useState} from "react";
 
-export default function IndicesTable() {
-  const rows = elements.map((element) => (
+export default  function IndicesTable() {
+  const [data, setData] = useState<IndicePerfType[]>([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const d = await api.fetchIndicesPerformance();
+      setData(d);
+    }
+
+    fetchData().catch((err) => console.error(err));
+  }, []);
+
+  const rows = data?.map((element) => (
     <Table.Tr key={element.indice}>
       <Table.Td>{element.indice}</Table.Td>
-      <Table.Td><Badge variant="light" color={element.change > 0 ? "green" : "red"}
-                       size="sm">{element.change}</Badge></Table.Td>
-      <Table.Td>{element.symbol}</Table.Td>
+      <Table.Td>
+        <PerformanceBadge {...{value: element.change}}></PerformanceBadge>
+      </Table.Td>
+      <Table.Td>
+        <NumberFormatter value={element.points} decimalScale={2}/>
+      </Table.Td>
       <Table.Td><Switch/></Table.Td>
     </Table.Tr>
   ));
@@ -26,11 +42,3 @@ export default function IndicesTable() {
     </Table>
   );
 }
-
-const elements = [
-  {position: 6, change: -12.011, symbol: 'C', indice: 'Carbon'},
-  {position: 7, change: 14.007, symbol: 'N', indice: 'Nitrogen'},
-  {position: 39, change: -88.906, symbol: 'Y', indice: 'Yttrium'},
-  {position: 56, change: 137.33, symbol: 'Ba', indice: 'Barium'},
-  {position: 58, change: -140.12, symbol: 'Ce', indice: 'Cerium'},
-];

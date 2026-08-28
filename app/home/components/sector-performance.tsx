@@ -1,10 +1,26 @@
 import {Table} from '@mantine/core';
+import PerformanceBadge from "@/app/shared/perf-badge";
+import api, {SectorPerfType} from '@/app/api/data';
+import {useEffect, useState} from "react";
 
 export default function SectorPerformance() {
-  const rows = elements.map((element) => (
+  const [data, setData] = useState<SectorPerfType[]>([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const d = await api.fetchSectorPerformance();
+      setData(d);
+    }
+
+    fetchData().catch((err) => console.error(err));
+  }, []);
+
+  const rows = data?.map((element) => (
     <Table.Tr key={element.id}>
       <Table.Td>{element.sector}</Table.Td>
-      <Table.Td>{element.performance}</Table.Td>
+      <Table.Td>
+        <PerformanceBadge {...{value: element.performance}}></PerformanceBadge>
+      </Table.Td>
     </Table.Tr>
   ));
 
@@ -21,10 +37,7 @@ export default function SectorPerformance() {
   );
 }
 
-const elements = [
-  {sector: 'C', performance: 1, id: 1,},
-  {sector: 'N', performance: 2, id: 2,},
-  {sector: 'Y', performance: 3, id: 3},
-  {sector: 'Ba', performance: 4, id: 4,},
-  {sector: 'Ce', performance: 5, id: 5,},
-];
+export async function getServerSideProps() {
+  const data = await api.fetchSectorPerformance();
+  return {props: {data}}
+}
