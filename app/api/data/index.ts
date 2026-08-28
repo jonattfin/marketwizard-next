@@ -30,11 +30,11 @@ export type MarketPerfType = {
 
 function createMarketPerformance(): MarketPerfType[] {
   return [
-    {sector: 'C', performance: nextRandom(), id: 1,},
-    {sector: 'N', performance: nextRandom(), id: 2,},
-    {sector: 'Y', performance: nextRandom(), id: 3},
-    {sector: 'Ba', performance: nextRandom(), id: 4,},
-    {sector: 'Ce', performance: nextRandom(), id: 5,},
+    {sector: 'Materials', performance: nextRandom(), id: 1,},
+    {sector: 'Technology', performance: nextRandom(), id: 2,},
+    {sector: 'Basic Materials', performance: nextRandom(), id: 3},
+    {sector: 'Industrials', performance: nextRandom(), id: 4,},
+    {sector: 'Health Care', performance: nextRandom(), id: 5,},
   ];
 }
 
@@ -46,11 +46,11 @@ export type SectorPerfType = {
 
 function createSectorPerformance(): SectorPerfType[] {
   return [
-    {sector: 'C', performance: nextRandom(), id: 1,},
-    {sector: 'N', performance: nextRandom(), id: 2,},
-    {sector: 'Y', performance: nextRandom(), id: 3},
-    {sector: 'Ba', performance: nextRandom(), id: 4,},
-    {sector: 'Ce', performance: nextRandom(), id: 5,},
+    {sector: 'Materials', performance: nextRandom(), id: 1,},
+    {sector: 'Technology', performance: nextRandom(), id: 2,},
+    {sector: 'Basic Materials', performance: nextRandom(), id: 3},
+    {sector: 'Industrials', performance: nextRandom(), id: 4,},
+    {sector: 'Health Care', performance: nextRandom(), id: 5,},
   ];
 }
 

@@ -1,4 +1,4 @@
-import {Table} from '@mantine/core';
+import {Grid, Table} from '@mantine/core';
 import PerformanceBadge from "@/app/shared/perf-badge";
 import api, {SectorPerfType} from '@/app/api/data';
 import {useEffect, useState} from "react";
@@ -25,15 +25,30 @@ export default function SectorPerformance() {
   ));
 
   return (
-    <Table>
-      <Table.Thead>
-        <Table.Tr>
-          <Table.Th>Sector</Table.Th>
-          <Table.Th>Performance</Table.Th>
-        </Table.Tr>
-      </Table.Thead>
-      <Table.Tbody>{rows}</Table.Tbody>
-    </Table>
+    <Grid>
+      <Grid.Col span={6}>
+        <Table>
+          <Table.Thead>
+            <Table.Tr>
+              <Table.Th>Sector</Table.Th>
+              <Table.Th>Performance</Table.Th>
+            </Table.Tr>
+          </Table.Thead>
+          <Table.Tbody>{rows}</Table.Tbody>
+        </Table>
+      </Grid.Col>
+      <Grid.Col span={6}>
+        <Table>
+          <Table.Thead>
+            <Table.Tr>
+              <Table.Th>Sector</Table.Th>
+              <Table.Th>Performance</Table.Th>
+            </Table.Tr>
+          </Table.Thead>
+          <Table.Tbody>{rows}</Table.Tbody>
+        </Table>
+      </Grid.Col>
+    </Grid>
   );
 }
 

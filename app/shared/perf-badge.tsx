@@ -8,7 +8,7 @@ export type PerformanceBadgeProps = {
 export default function PerformanceBadge({value}: PerformanceBadgeProps): JSX.Element {
   return (
     <Badge variant="light" color={value > 0 ? "green" : "orange"} size="sm">
-      <NumberFormatter value={value} decimalScale={2}/>
+      <NumberFormatter value={value} decimalScale={2} suffix={"%"}/>
     </Badge>
   )
 }

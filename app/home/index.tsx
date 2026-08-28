@@ -1,11 +1,10 @@
 'use client';
 
-import {Grid, Accordion, Stack} from '@mantine/core';
+import {Grid, Accordion, Stack, Image} from '@mantine/core';
 import {IconPhoto, IconPrinter, IconCameraSelfie} from '@tabler/icons-react';
 import IndicesTable from "@/app/home/components/indices-table";
 
 import MarketPerformance from "@/app/home/components/market-performance";
-import {CustomBarChart} from "@/app/home/components/bar-chart";
 import SectorPerformance from "@/app/home/components/sector-performance";
 import TopNews from "@/app/home/components/top-news";
 
@@ -16,7 +15,13 @@ export default function Home() {
       <Grid.Col span={10}>
         <Stack>
           <Grid>
-            <Grid.Col span={9}><CustomBarChart/></Grid.Col>
+            <Grid.Col span={9}>
+              <Image
+                radius="md"
+                h={300}
+                src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-10.png"
+              />
+            </Grid.Col>
             <Grid.Col span={3}><IndicesTable/></Grid.Col>
           </Grid>
           <Grid>
