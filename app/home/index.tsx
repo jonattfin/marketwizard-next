@@ -1,6 +1,6 @@
 'use client';
 
-import {Grid, Accordion, Stack, Image, Blockquote} from '@mantine/core';
+import {Grid, Accordion, Stack, Blockquote } from '@mantine/core';
 import {IconPhoto, IconPrinter, IconCameraSelfie, IconInfoCircle} from '@tabler/icons-react';
 import IndicesTable from "@/app/home/components/indices-table";
 
@@ -10,7 +10,6 @@ import TopNews from "@/app/home/components/top-news";
 import {CustomBarChart} from "@/app/home/components/composite-chart";
 import Header from "@/app/shared/header";
 import {YouTubeVideo} from "@/app/home/components/youtube-video";
-import {Carousel} from "@mantine/carousel";
 
 export default function Home() {
   return (
@@ -23,32 +22,10 @@ export default function Home() {
           <Stack>
             <Grid>
               <Grid.Col span={12}>
-                <Carousel withIndicators height={400}>
-                  <Carousel.Slide>
-                    <CustomBarChart/>
-                  </Carousel.Slide>
-                  <Carousel.Slide>
-                    <CustomBarChart/>
-                  </Carousel.Slide>
-                  <Carousel.Slide>
-                    <CustomBarChart/>
-                  </Carousel.Slide>
-                   <Carousel.Slide>
-                    <CustomBarChart/>
-                  </Carousel.Slide>
-                   <Carousel.Slide>
-                    <CustomBarChart/>
-                  </Carousel.Slide>
-                  {/* ...other slides */}
-                </Carousel>
-
-                {/*<Image*/}
-                {/*  radius="md"*/}
-                {/*  h={300}*/}
-                {/*  src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-10.png"*/}
-                {/*/>*/}
+                <IndicesTable/>
+                <div>&nbsp;</div>
+                <CustomBarChart/>
               </Grid.Col>
-              {/*<Grid.Col span={3}><IndicesTable/></Grid.Col>*/}
             </Grid>
             <Grid>
               <Grid.Col span={9}><AccordionSection/></Grid.Col>

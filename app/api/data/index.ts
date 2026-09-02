@@ -70,7 +70,7 @@ function createIndicesPerformance(): IndicePerfType[] {
     {position: 58, change: nextRandom(), points: nextPoints(), indice: 'Stoxx 50'},
     {position: 58, change: nextRandom(), points: nextPoints(), indice: 'IBEX 35'},
     {position: 58, change: nextRandom(), points: nextPoints(), indice: 'ASX 200'},
-    {position: 58, change: nextRandom(), points: nextPoints(), indice: 'Shanghai Composite'},
+    // {position: 58, change: nextRandom(), points: nextPoints(), indice: 'Shanghai Composite'},
     {position: 58, change: nextRandom(), points: nextPoints(), indice: 'KOSPI'},
   ];
 }

@@ -1,10 +1,13 @@
-import {Table, Switch, NumberFormatter} from '@mantine/core';
+import {Radio, Group, Flex, Text} from '@mantine/core';
 import PerformanceBadge from "@/app/shared/perf-badge";
 import api, {IndicePerfType} from "@/app/api/data";
 import {useEffect, useState} from "react";
 
-export default  function IndicesTable() {
+import classes from './indices-table.module.css';
+
+export default function IndicesTable() {
   const [data, setData] = useState<IndicePerfType[]>([]);
+  const [value, setValue] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -15,30 +18,32 @@ export default  function IndicesTable() {
     fetchData().catch((err) => console.error(err));
   }, []);
 
-  const rows = data?.map((element) => (
-    <Table.Tr key={element.indice}>
-      <Table.Td>{element.indice}</Table.Td>
-      <Table.Td>
-        <PerformanceBadge {...{value: element.change}}></PerformanceBadge>
-      </Table.Td>
-      <Table.Td>
-        <NumberFormatter value={element.points} decimalScale={2}/>
-      </Table.Td>
-      <Table.Td><Switch/></Table.Td>
-    </Table.Tr>
+  const cards = data.map((item) => (
+    <Radio.Card className={classes.root} value={item.indice} key={item.indice}>
+      <Group wrap="nowrap" align="flex-start">
+        <Radio.Indicator/>
+        <div>
+          <Text className={classes.label}>{item.indice}</Text>
+          <PerformanceBadge value={item.change}/>
+        </div>
+      </Group>
+    </Radio.Card>
   ));
 
   return (
-    <Table>
-      <Table.Thead>
-        <Table.Tr>
-          <Table.Th>Indice</Table.Th>
-          <Table.Th>Change</Table.Th>
-          <Table.Th>Points</Table.Th>
-          <Table.Th>Off/On</Table.Th>
-        </Table.Tr>
-      </Table.Thead>
-      <Table.Tbody>{rows}</Table.Tbody>
-    </Table>
+    <>
+      <Radio.Group
+        value={value}
+        onChange={setValue}
+      >
+        <Flex pt="md" gap="xs" >
+          {cards}
+        </Flex>
+      </Radio.Group>
+
+      <Text fz="xs" mt="md">
+        CurrentValue: {value || '–'}
+      </Text>
+    </>
   );
 }
