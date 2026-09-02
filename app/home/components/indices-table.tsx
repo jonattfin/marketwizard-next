@@ -5,9 +5,14 @@ import {useEffect, useState} from "react";
 
 import classes from './indices-table.module.css';
 
-export default function IndicesTable() {
+export type IndicesTableProps = {
+  indice: string;
+  setIndice: (indice: string) => void;
+}
+
+export default function IndicesTable({indice, setIndice}: IndicesTableProps) {
   const [data, setData] = useState<IndicePerfType[]>([]);
-  const [value, setValue] = useState<string | null>(null);
+
 
   useEffect(() => {
     async function fetchData() {
@@ -19,7 +24,7 @@ export default function IndicesTable() {
   }, []);
 
   const cards = data.map((item) => (
-    <Radio.Card className={classes.root} value={item.indice} key={item.indice}>
+    <Radio.Card className={classes.root} value={item.indice} key={item.indice} >
       <Group wrap="nowrap" align="flex-start">
         <Radio.Indicator/>
         <div>
@@ -33,17 +38,15 @@ export default function IndicesTable() {
   return (
     <>
       <Radio.Group
-        value={value}
-        onChange={setValue}
+        value={indice}
+        onChange={(newValue) => {
+          setIndice(newValue);
+        }}
       >
         <Flex pt="md" gap="xs" >
           {cards}
         </Flex>
       </Radio.Group>
-
-      <Text fz="xs" mt="md">
-        CurrentValue: {value || '–'}
-      </Text>
     </>
   );
 }

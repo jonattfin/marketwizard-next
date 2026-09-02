@@ -10,21 +10,28 @@ import TopNews from "@/app/home/components/top-news";
 import {CustomBarChart} from "@/app/home/components/composite-chart";
 import Header from "@/app/shared/header";
 import {YouTubeVideo} from "@/app/home/components/youtube-video";
+import {IndexContext} from "@/app/shared/context/index-context";
+import {useState} from "react";
+import {INDICES} from "@/app/shared/helpers";
+
 
 export default function Home() {
+  const [indice, setIndice] = useState<string>(INDICES[0])
+
   return (
     <>
+      <IndexContext value={indice}>
       <Grid>
-        <Grid.Col span={1}></Grid.Col>
-        <Grid.Col span={10}>
+        <Grid.Col span={1.5}>
+        </Grid.Col>
+        <Grid.Col span={9}>
           <Header/>
-          <div>&nbsp;</div>
           <Stack>
             <Grid>
               <Grid.Col span={12}>
-                <IndicesTable/>
+                <IndicesTable {...{indice, setIndice}}/>
                 <div>&nbsp;</div>
-                <CustomBarChart/>
+                <CustomBarChart indice={indice}/>
               </Grid.Col>
             </Grid>
             <Grid>
@@ -42,8 +49,9 @@ export default function Home() {
             </Grid>
           </Stack>
         </Grid.Col>
-        <Grid.Col span={1}></Grid.Col>
+        <Grid.Col span={1.5}></Grid.Col>
       </Grid>
+      </IndexContext>
     </>
   );
 }

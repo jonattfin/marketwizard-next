@@ -1,4 +1,4 @@
-export const data = [
+export const buildData = () => [
   {
     date: 'Mar 20',
     Apples: 2890,
