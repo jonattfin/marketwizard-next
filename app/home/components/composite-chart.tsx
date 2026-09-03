@@ -5,16 +5,22 @@ import {useQuery} from "@tanstack/react-query";
 import api from "@/app/api/data";
 import Loading from "@/app/shared/loading";
 
-export function CustomBarChart() {
+
+const useCustomChart = () => {
   const indice = useContext(IndexContext)
 
-  const query = useQuery({
+  return useQuery({
     queryKey: [`indice-performance-${indice}`],
     queryFn: () => api.fetchIndicePerformance(indice)
   });
+}
+
+
+export function CustomBarChart() {
+  const query = useCustomChart();
 
   if (query.isLoading)
-    return <Loading />;
+    return <Loading/>;
 
   return (
     <>

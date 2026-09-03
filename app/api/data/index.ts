@@ -1,5 +1,5 @@
 import {LoremIpsum} from "lorem-ipsum";
-import {random, range} from "es-toolkit";
+import {random, range } from "es-toolkit";
 import {INDICES} from "@/app/shared/helpers";
 
 const lorem = new LoremIpsum();
@@ -8,51 +8,86 @@ const nextWords = () => lorem.generateWords(15);
 const nextPoints = () => random(1000, 5000);
 
 export type TopNewsType = {
-  id: number;
-  headline: string;
-  source: string
+  date: string;
+  items: {
+    id: number;
+    headline: string;
+    source: string
+  } []
 }
 
-function createTopNews(indice: string): TopNewsType[] {
-  return [
-    {source: 'C', headline: nextWords(), id: 1,},
-    {source: 'N', headline: nextWords(), id: 2,},
-    {source: 'Y', headline: nextWords(), id: 3},
-    {source: 'Ba', headline: nextWords(), id: 4,},
-    {source: 'Ce', headline: nextWords(), id: 5,},
-  ];
+function createTopNews(indice: string): TopNewsType {
+  return {
+    date: "Sep 3, 2026 6:26 PM",
+    items: [
+      {source: 'C', headline: nextWords(), id: 1,},
+      {source: 'N', headline: nextWords(), id: 2,},
+      {source: 'Y', headline: nextWords(), id: 3},
+      {source: 'Ba', headline: nextWords(), id: 4,},
+      {source: 'Ce', headline: nextWords(), id: 5,},
+    ]
+  }
 }
 
 export type MarketPerfType = {
+  date: string,
+  items: {
+    id: number;
+    performance: number;
+    sector: string
+  }[]
+}
+
+function createMarketPerformance(indice: string): MarketPerfType {
+  return {
+    date: "Sep 3, 2026 6:26 PM",
+    items: [
+      {sector: 'Materials', performance: nextRandom(), id: 1,},
+      {sector: 'Technology', performance: nextRandom(), id: 2,},
+      {sector: 'Basic Materials', performance: nextRandom(), id: 3},
+      {sector: 'Industrials', performance: nextRandom(), id: 4,},
+      {sector: 'Health Care', performance: nextRandom(), id: 5,},
+    ]
+  }
+}
+
+export type SectorPerfItemType = {
   id: number;
   performance: number;
   sector: string
-}
-
-function createMarketPerformance(indice: string): MarketPerfType[] {
-  return [
-    {sector: 'Materials', performance: nextRandom(), id: 1,},
-    {sector: 'Technology', performance: nextRandom(), id: 2,},
-    {sector: 'Basic Materials', performance: nextRandom(), id: 3},
-    {sector: 'Industrials', performance: nextRandom(), id: 4,},
-    {sector: 'Health Care', performance: nextRandom(), id: 5,},
-  ];
 }
 
 export type SectorPerfType = {
-  id: number;
-  performance: number;
-  sector: string
+  date: string,
+  items: SectorPerfItemType []
 }
 
-function createSectorPerformance(indice: string): SectorPerfType[] {
-  return [
-    {sector: `Materials ${indice}`, performance: nextRandom(), id: 1,},
-    {sector: 'Technology', performance: nextRandom(), id: 2,},
-    {sector: 'Basic Materials', performance: nextRandom(), id: 3},
-    {sector: 'Industrials', performance: nextRandom(), id: 4,},
-    {sector: 'Health Care', performance: nextRandom(), id: 5,},
-  ];
+function createSectorPerformance(indice: string): SectorPerfType {
+  const sectors = [
+    "Basic Materials",
+    "Telecom",
+    "Consumer Goods",
+    "Customer Stapes",
+    "Consumer Services",
+    "Energy",
+    "Financials",
+    "Health Care",
+    "Industrials",
+    "Materials",
+    "Utilities",
+    "Technology",
+  ]
+
+  return {
+    date: "Sep 3, 2026 6:26 PM",
+    items: sectors.sort().map((sector, index) => {
+      return {
+        sector,
+        performance: nextRandom(),
+        id: index
+      }
+    })
+  }
 }
 
 export type IndicePerfType = {

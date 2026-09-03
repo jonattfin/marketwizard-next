@@ -4,22 +4,29 @@ import api from "@/app/api/data";
 
 import classes from './indices-table.module.css';
 import {useQuery} from "@tanstack/react-query";
+import Loading from "@/app/shared/loading";
 
 export type IndicesTableProps = {
   indice: string;
   setIndice: (indice: string) => void;
 }
 
-export default function IndicesTable({indice, setIndice}: IndicesTableProps) {
-
-  const query = useQuery({
+const useIndicesPerformance = () => {
+  return useQuery({
     queryKey: ['indices'],
     queryFn: api.fetchIndicesPerformance
   })
+}
 
+export default function IndicesTable({indice, setIndice}: IndicesTableProps) {
+  const query = useIndicesPerformance();
+
+  if (query.isLoading) {
+    return <Loading/>;
+  }
 
   const cards = query.data?.map((item) => (
-    <Radio.Card className={classes.root} value={item.indice} key={item.indice} >
+    <Radio.Card className={classes.root} value={item.indice} key={item.indice}>
       <Group wrap="nowrap" align="flex-start">
         <Radio.Indicator/>
         <div>
@@ -38,7 +45,7 @@ export default function IndicesTable({indice, setIndice}: IndicesTableProps) {
           setIndice(newValue);
         }}
       >
-        <Flex pt="md" gap="xs" >
+        <Flex pt="md" gap="xs">
           {cards}
         </Flex>
       </Radio.Group>
