@@ -1,5 +1,5 @@
 import {Badge, Flex, Table} from '@mantine/core';
-import api from '@/app/api/data'
+import api, {TopNewsType} from '@/app/api/data'
 import {useContext} from 'react';
 import {useQuery} from "@tanstack/react-query";
 import Loading from "@/app/shared/loading";
@@ -8,9 +8,12 @@ import {IndexContext} from "@/app/shared/context/index-context";
 const useTopNews = () => {
   const indice = useContext(IndexContext)
 
-  return useQuery({
+  return useQuery<TopNewsType>({
     queryKey: [`top-news-${indice}`],
-    queryFn: () => api.fetchTopNews(indice)
+    queryFn: async () => {
+      const response = await fetch(`/api/top-news?indice=${indice}`);
+      return await response.json();
+    }
   });
 
 }

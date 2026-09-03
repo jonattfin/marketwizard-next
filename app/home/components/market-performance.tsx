@@ -1,6 +1,6 @@
 import {Badge, Flex, Grid, Table, Tabs} from '@mantine/core';
 import PerformanceBadge from "@/app/shared/perf-badge";
-import api, {MarketPerfType} from '@/app/api/data'
+import {MarketPerfType} from '@/app/api/data'
 import {IconMessageCircle, IconPhoto} from "@tabler/icons-react";
 import {useContext} from 'react';
 import {useQuery} from "@tanstack/react-query";
@@ -10,9 +10,12 @@ import {IndexContext} from "@/app/shared/context/index-context";
 const useMarketPerformance = () => {
   const indice = useContext(IndexContext)
 
-  return useQuery({
+  return useQuery<MarketPerfType>({
     queryKey: [`market-performance-${indice}`],
-    queryFn: () => api.fetchMarketPerformance(indice)
+    queryFn: async () => {
+      const response = await fetch(`/api/market-performance?indice=${indice}`);
+      return await response.json();
+    }
   });
 }
 

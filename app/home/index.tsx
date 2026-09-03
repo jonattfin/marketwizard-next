@@ -13,6 +13,7 @@ import {YouTubeVideo} from "@/app/home/components/youtube-video";
 import {IndexContext} from "@/app/shared/context/index-context";
 import {useState} from "react";
 import {INDICES} from "@/app/shared/helpers";
+import Footer from "@/app/shared/footer";
 
 export default function Home() {
   const [indice, setIndice] = useState<string>(INDICES[0])
@@ -21,7 +22,7 @@ export default function Home() {
     <>
       <IndexContext value={indice}>
         <Grid>
-          <Grid.Col span={{ base: 0, lg: 1.5 }}>
+          <Grid.Col span={{base: 0, lg: 1.5}}>
           </Grid.Col>
           <Grid.Col span={9}>
             <Header/>
@@ -34,23 +35,21 @@ export default function Home() {
                 </Grid.Col>
               </Grid>
               <Grid>
-                <Grid.Col span={{ base: 12, lg: 9 }}>
+                <Grid.Col span={{base: 12, lg: 9}}>
                   <AccordionSection/>
                 </Grid.Col>
-                <Grid.Col span={{ base: 12, lg: 3 }}>
+                <Grid.Col span={{base: 12, lg: 3}}>
                   <YouTubeVideo/>
                   <Blockquote color="blue" cite="– Forrest Gump" icon={<IconInfoCircle/>} mt="xl">
                     Life is like an npm install – you never know what you are going to get.
                   </Blockquote>
                 </Grid.Col>
               </Grid>
-              <Grid>
-                <Grid.Col span={9}></Grid.Col>
-                <Grid.Col span={3}></Grid.Col>
-              </Grid>
+              <div>&nbsp;</div>
+              <Footer/>
             </Stack>
           </Grid.Col>
-          <Grid.Col span={{ base: 0, lg: 1.5 }}></Grid.Col>
+          <Grid.Col span={{base: 0, lg: 1.5}}></Grid.Col>
         </Grid>
       </IndexContext>
     </>

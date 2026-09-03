@@ -1,20 +1,21 @@
-import {CompositeChart} from '@mantine/charts';
+import {AreaChart, CandlestickChart, CompositeChart} from '@mantine/charts';
 import {IndexContext} from "@/app/shared/context/index-context";
 import {useContext} from 'react';
 import {useQuery} from "@tanstack/react-query";
-import api from "@/app/api/data";
 import Loading from "@/app/shared/loading";
-
+import {Grid} from "@mantine/core";
 
 const useCustomChart = () => {
   const indice = useContext(IndexContext)
 
   return useQuery({
     queryKey: [`indice-performance-${indice}`],
-    queryFn: () => api.fetchIndicePerformance(indice)
+    queryFn: async () => {
+      const response = await fetch(`/api/indice-performance?indice=${indice}`);
+      return await response.json();
+    }
   });
 }
-
 
 export function CustomBarChart() {
   const query = useCustomChart();
@@ -25,18 +26,22 @@ export function CustomBarChart() {
   return (
     <>
       <CompositeChart
-        h={300}
-        data={query?.data || []}
+        h={180}
+        data={query.data}
         dataKey="date"
-        xAxisLabel="Date"
-        yAxisLabel="Amount"
-        maxBarWidth={30}
-        series={[
-          {name: 'tomatoes', color: 'rgba(18, 120, 255, 0.2)', type: 'bar'},
-          {name: 'apples', color: 'red.8', type: 'line'},
-          {name: 'oranges', color: 'yellow.8', type: 'area'},
-        ]}
+        series={[{name: 'price', color: 'red.6', type: 'area'}]}
+        composedChartProps={{syncId: 'groceries'}}
       />
+      <div>&nbsp;</div>
+      <CompositeChart
+        h={180}
+        data={query.data}
+        dataKey="date"
+        composedChartProps={{syncId: 'groceries'}}
+        series={[{name: 'volume', color: 'green.6', type: 'bar'}]}
+      />
+      <div>&nbsp;</div>
     </>
-  );
+
+  )
 }

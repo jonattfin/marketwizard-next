@@ -1,6 +1,6 @@
 import {Badge, Flex, Grid, Table} from '@mantine/core';
 import PerformanceBadge from "@/app/shared/perf-badge";
-import api, {SectorPerfItemType} from '@/app/api/data';
+import {SectorPerfItemType, SectorPerfType} from '@/app/api/data';
 
 import {IndexContext} from "@/app/shared/context/index-context";
 import {useContext} from 'react';
@@ -10,9 +10,12 @@ import Loading from "@/app/shared/loading";
 const useSectorPerformance = () => {
   const indice = useContext(IndexContext)
 
-  return useQuery({
+  return useQuery<SectorPerfType>({
     queryKey: [`sector-performance-${indice}`],
-    queryFn: () => api.fetchSectorPerformance(indice)
+    queryFn: async () => {
+      const response = await fetch(`/api/sector-performance?indice=${indice}`);
+      return await response.json();
+    }
   });
 
 }
@@ -31,13 +34,13 @@ export default function SectorPerformance() {
 
   const buildRows = (items: SectorPerfItemType[]) => {
     return items?.map((element) => (
-    <Table.Tr key={element.id}>
-      <Table.Td>{element.sector}</Table.Td>
-      <Table.Td>
-        <PerformanceBadge {...{value: element.performance}}></PerformanceBadge>
-      </Table.Td>
-    </Table.Tr>
-  ));
+      <Table.Tr key={element.id}>
+        <Table.Td>{element.sector}</Table.Td>
+        <Table.Td>
+          <PerformanceBadge {...{value: element.performance}}></PerformanceBadge>
+        </Table.Td>
+      </Table.Tr>
+    ));
 
   }
 

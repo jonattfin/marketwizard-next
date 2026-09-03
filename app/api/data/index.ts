@@ -1,5 +1,5 @@
 import {LoremIpsum} from "lorem-ipsum";
-import {random, range } from "es-toolkit";
+import {random, randomInt, range} from "es-toolkit";
 import {INDICES} from "@/app/shared/helpers";
 
 const lorem = new LoremIpsum();
@@ -62,25 +62,25 @@ export type SectorPerfType = {
   items: SectorPerfItemType []
 }
 
-function createSectorPerformance(indice: string): SectorPerfType {
-  const sectors = [
-    "Basic Materials",
-    "Telecom",
-    "Consumer Goods",
-    "Customer Stapes",
-    "Consumer Services",
-    "Energy",
-    "Financials",
-    "Health Care",
-    "Industrials",
-    "Materials",
-    "Utilities",
-    "Technology",
-  ]
+export const SECTORS = [
+  "Basic Materials",
+  "Telecom",
+  "Consumer Goods",
+  "Customer Stapes",
+  "Consumer Services",
+  "Energy",
+  "Financials",
+  "Health Care",
+  "Industrials",
+  "Materials",
+  "Utilities",
+  "Technology",
+];
 
+function createSectorPerformance(indice: string): SectorPerfType {
   return {
     date: "Sep 3, 2026 6:26 PM",
-    items: sectors.sort().map((sector, index) => {
+    items: SECTORS.sort().map((sector, index) => {
       return {
         sector,
         performance: nextRandom(),
@@ -112,9 +112,8 @@ function createIndicePerformance(indice: string) {
   return range(1, 20).map(day => {
     return {
       date: `Mar ${day}`,
-      apples: random(1000, 3000),
-      oranges: random(1000, 3000),
-      tomatoes: random(1000, 3000)
+      price: randomInt(100),
+      volume: randomInt(100),
     }
   })
 }
