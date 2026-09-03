@@ -1,5 +1,5 @@
 import {LoremIpsum} from "lorem-ipsum";
-import {random} from "es-toolkit";
+import {random, range} from "es-toolkit";
 import {INDICES} from "@/app/shared/helpers";
 
 const lorem = new LoremIpsum();
@@ -13,7 +13,7 @@ export type TopNewsType = {
   source: string
 }
 
-function createTopNews(): TopNewsType[] {
+function createTopNews(indice: string): TopNewsType[] {
   return [
     {source: 'C', headline: nextWords(), id: 1,},
     {source: 'N', headline: nextWords(), id: 2,},
@@ -29,7 +29,7 @@ export type MarketPerfType = {
   sector: string
 }
 
-function createMarketPerformance(): MarketPerfType[] {
+function createMarketPerformance(indice: string): MarketPerfType[] {
   return [
     {sector: 'Materials', performance: nextRandom(), id: 1,},
     {sector: 'Technology', performance: nextRandom(), id: 2,},
@@ -45,9 +45,9 @@ export type SectorPerfType = {
   sector: string
 }
 
-function createSectorPerformance(): SectorPerfType[] {
+function createSectorPerformance(indice: string): SectorPerfType[] {
   return [
-    {sector: 'Materials', performance: nextRandom(), id: 1,},
+    {sector: `Materials ${indice}`, performance: nextRandom(), id: 1,},
     {sector: 'Technology', performance: nextRandom(), id: 2,},
     {sector: 'Basic Materials', performance: nextRandom(), id: 3},
     {sector: 'Industrials', performance: nextRandom(), id: 4,},
@@ -73,9 +73,21 @@ function createIndicesPerformance(): IndicePerfType[] {
   })
 }
 
+function createIndicePerformance(indice: string) {
+  return range(1, 20).map(day => {
+    return {
+      date: `Mar ${day}`,
+      apples: random(1000, 3000),
+      oranges: random(1000, 3000),
+      tomatoes: random(1000, 3000)
+    }
+  })
+}
+
 export default {
-  fetchTopNews: async () => createTopNews(),
-  fetchMarketPerformance: async () => createMarketPerformance(),
-  fetchSectorPerformance: async () => createSectorPerformance(),
+  fetchTopNews: async (indice: string) => createTopNews(indice),
+  fetchMarketPerformance: async (indice: string) => createMarketPerformance(indice),
+  fetchSectorPerformance: async (indice: string) => createSectorPerformance(indice),
   fetchIndicesPerformance: async () => createIndicesPerformance(),
+  fetchIndicePerformance: async (indice: string) => createIndicePerformance(indice),
 }

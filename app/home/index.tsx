@@ -1,6 +1,6 @@
 'use client';
 
-import {Grid, Accordion, Stack, Blockquote } from '@mantine/core';
+import {Grid, Accordion, Stack, Blockquote} from '@mantine/core';
 import {IconPhoto, IconPrinter, IconCameraSelfie, IconInfoCircle} from '@tabler/icons-react';
 import IndicesTable from "@/app/home/components/indices-table";
 
@@ -14,43 +14,42 @@ import {IndexContext} from "@/app/shared/context/index-context";
 import {useState} from "react";
 import {INDICES} from "@/app/shared/helpers";
 
-
 export default function Home() {
   const [indice, setIndice] = useState<string>(INDICES[0])
 
   return (
     <>
       <IndexContext value={indice}>
-      <Grid>
-        <Grid.Col span={1.5}>
-        </Grid.Col>
-        <Grid.Col span={9}>
-          <Header/>
-          <Stack>
-            <Grid>
-              <Grid.Col span={12}>
-                <IndicesTable {...{indice, setIndice}}/>
-                <div>&nbsp;</div>
-                <CustomBarChart indice={indice}/>
-              </Grid.Col>
-            </Grid>
-            <Grid>
-              <Grid.Col span={9}><AccordionSection/></Grid.Col>
-              <Grid.Col span={3}>
-                <YouTubeVideo/>
-                <Blockquote color="blue" cite="– Forrest Gump" icon={<IconInfoCircle/>} mt="xl">
-                  Life is like an npm install – you never know what you are going to get.
-                </Blockquote>
-              </Grid.Col>
-            </Grid>
-            <Grid>
-              <Grid.Col span={9}></Grid.Col>
-              <Grid.Col span={3}></Grid.Col>
-            </Grid>
-          </Stack>
-        </Grid.Col>
-        <Grid.Col span={1.5}></Grid.Col>
-      </Grid>
+        <Grid>
+          <Grid.Col span={1.5}>
+          </Grid.Col>
+          <Grid.Col span={9}>
+            <Header/>
+            <Stack>
+              <Grid>
+                <Grid.Col span={12}>
+                  <IndicesTable {...{indice, setIndice}}/>
+                  <div>&nbsp;</div>
+                  <CustomBarChart/>
+                </Grid.Col>
+              </Grid>
+              <Grid>
+                <Grid.Col span={9}><AccordionSection/></Grid.Col>
+                <Grid.Col span={3}>
+                  <YouTubeVideo/>
+                  <Blockquote color="blue" cite="– Forrest Gump" icon={<IconInfoCircle/>} mt="xl">
+                    Life is like an npm install – you never know what you are going to get.
+                  </Blockquote>
+                </Grid.Col>
+              </Grid>
+              <Grid>
+                <Grid.Col span={9}></Grid.Col>
+                <Grid.Col span={3}></Grid.Col>
+              </Grid>
+            </Stack>
+          </Grid.Col>
+          <Grid.Col span={1.5}></Grid.Col>
+        </Grid>
       </IndexContext>
     </>
   );

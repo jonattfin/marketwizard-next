@@ -1,8 +1,11 @@
 import {Grid, Table, Tabs} from '@mantine/core';
 import PerformanceBadge from "@/app/shared/perf-badge";
-import api, {MarketPerfType} from '@/app/api/data'
-import {useEffect, useState} from "react";
-import {IconMessageCircle, IconPhoto, IconSettings} from "@tabler/icons-react";
+import api from '@/app/api/data'
+import {IconMessageCircle, IconPhoto } from "@tabler/icons-react";
+import {useContext} from 'react';
+import {useQuery} from "@tanstack/react-query";
+import Loading from "@/app/shared/loading";
+import {IndexContext} from "@/app/shared/context/index-context";
 
 export default function MarketsPerformance() {
   return (
@@ -42,18 +45,14 @@ function MarketPerformanceTabs() {
 }
 
 export function MarketPerformanceGrid() {
-  const [data, setData] = useState<MarketPerfType[]>([]);
+  const indice = useContext(IndexContext)
 
-  useEffect(() => {
-    async function fetchData() {
-      const d = await api.fetchMarketPerformance();
-      setData(d);
-    }
+  const query = useQuery({
+    queryKey: [`market-performance-${indice}`],
+    queryFn: () => api.fetchMarketPerformance(indice)
+  });
 
-    fetchData().catch((err) => console.error(err));
-  }, []);
-
-  const rows = data.map((element) => (
+  const rows = query.data?.map((element) => (
     <Table.Tr key={element.id}>
       <Table.Td>{element.sector}</Table.Td>
       <Table.Td>
@@ -61,6 +60,10 @@ export function MarketPerformanceGrid() {
       </Table.Td>
     </Table.Tr>
   ));
+
+  if (query.isLoading) {
+    return <Loading/>;
+  }
 
   return (
     <Table>

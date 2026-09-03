@@ -1,21 +1,21 @@
 import {Grid, Table} from '@mantine/core';
 import PerformanceBadge from "@/app/shared/perf-badge";
-import api, {SectorPerfType} from '@/app/api/data';
-import {useEffect, useState} from "react";
+import api from '@/app/api/data';
+
+import {IndexContext} from "@/app/shared/context/index-context";
+import {useContext} from 'react';
+import {useQuery} from "@tanstack/react-query";
+import Loading from "@/app/shared/loading";
 
 export default function SectorPerformance() {
-  const [data, setData] = useState<SectorPerfType[]>([]);
+  const indice = useContext(IndexContext)
 
-  useEffect(() => {
-    async function fetchData() {
-      const d = await api.fetchSectorPerformance();
-      setData(d);
-    }
+  const query = useQuery({
+    queryKey: [`sector-performance-${indice}`],
+    queryFn: () => api.fetchSectorPerformance(indice)
+  });
 
-    fetchData().catch((err) => console.error(err));
-  }, []);
-
-  const rows = data?.map((element) => (
+  const rows = query.data?.map((element) => (
     <Table.Tr key={element.id}>
       <Table.Td>{element.sector}</Table.Td>
       <Table.Td>
@@ -23,6 +23,10 @@ export default function SectorPerformance() {
       </Table.Td>
     </Table.Tr>
   ));
+
+  if (query.isLoading) {
+    return <Loading/>;
+  }
 
   return (
     <Grid>

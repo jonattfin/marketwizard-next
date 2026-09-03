@@ -1,25 +1,28 @@
 import {Table} from '@mantine/core';
-import api, {TopNewsType} from '@/app/api/data'
-import {useEffect, useState} from "react";
+import api from '@/app/api/data'
+import {useContext} from 'react';
+import {useQuery} from "@tanstack/react-query";
+import Loading from "@/app/shared/loading";
+import {IndexContext} from "@/app/shared/context/index-context";
 
 export default function TopNews() {
-  const [data, setData] = useState<TopNewsType[]>([]);
+  const indice = useContext(IndexContext)
 
-  useEffect(() => {
-    async function fetchData() {
-      const d = await api.fetchTopNews();
-      setData(d);
-    }
+  const query = useQuery({
+    queryKey: [`top-news-${indice}`],
+    queryFn: () => api.fetchTopNews(indice)
+  });
 
-    fetchData().catch((err) => console.error(err));
-  }, []);
-
-  const rows = data?.map((element) => (
+  const rows = query.data?.map((element) => (
     <Table.Tr key={element.id}>
       <Table.Td>{element.headline}</Table.Td>
       <Table.Td>{element.source}</Table.Td>
     </Table.Tr>
   ));
+
+  if (query.isLoading) {
+    return <Loading/>;
+  }
 
   return (
     <Table>

@@ -1,9 +1,9 @@
 import {Radio, Group, Flex, Text} from '@mantine/core';
 import PerformanceBadge from "@/app/shared/perf-badge";
-import api, {IndicePerfType} from "@/app/api/data";
-import {useEffect, useState} from "react";
+import api from "@/app/api/data";
 
 import classes from './indices-table.module.css';
+import {useQuery} from "@tanstack/react-query";
 
 export type IndicesTableProps = {
   indice: string;
@@ -11,19 +11,14 @@ export type IndicesTableProps = {
 }
 
 export default function IndicesTable({indice, setIndice}: IndicesTableProps) {
-  const [data, setData] = useState<IndicePerfType[]>([]);
+
+  const query = useQuery({
+    queryKey: ['indices'],
+    queryFn: api.fetchIndicesPerformance
+  })
 
 
-  useEffect(() => {
-    async function fetchData() {
-      const d = await api.fetchIndicesPerformance();
-      setData(d);
-    }
-
-    fetchData().catch((err) => console.error(err));
-  }, []);
-
-  const cards = data.map((item) => (
+  const cards = query.data?.map((item) => (
     <Radio.Card className={classes.root} value={item.indice} key={item.indice} >
       <Group wrap="nowrap" align="flex-start">
         <Radio.Indicator/>
