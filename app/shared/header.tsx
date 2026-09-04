@@ -19,7 +19,7 @@ export default function Header() {
       <div>&nbsp;</div>
       <Group justify={"flex-end"}>
         <Link href={"/"}>Home</Link>
-        {/*<Link href={"#"}>Investor sentiment</Link>*/}
+        <Link href={"/sentiment"}>Investor sentiment</Link>
         <Link href={"/maps"}>Maps</Link>
         <Switch
           checked={checked}

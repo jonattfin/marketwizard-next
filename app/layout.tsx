@@ -5,17 +5,16 @@ import '@mantine/charts/styles.css';
 import '@mantine/carousel/styles.css';
 
 import {
-
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
 import {ReactQueryDevtools} from '@tanstack/react-query-devtools'
 
 import React from 'react';
-import {ColorSchemeScript, Grid, mantineHtmlProps, MantineProvider} from '@mantine/core';
+import {Grid, mantineHtmlProps, MantineProvider} from '@mantine/core';
 import {theme} from '@/theme';
 import Header from "@/app/shared/header";
-import Home from "@/app/home";
+import Footer from "@/app/shared/footer";
 
 // export const metadata = {
 //   title: 'Mantine Next.js template',
@@ -25,6 +24,7 @@ import Home from "@/app/home";
 const queryClient = new QueryClient()
 
 export default function RootLayout({children}: { children: any }) {
+
   return (
     <html lang="en" {...mantineHtmlProps}>
     <head>
@@ -39,7 +39,16 @@ export default function RootLayout({children}: { children: any }) {
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false}/>
       <MantineProvider theme={theme}>
-        {children}
+        <Grid>
+          <Grid.Col span={{base: 0, lg: 1.5}}>
+          </Grid.Col>
+          <Grid.Col span={9}>
+            <Header/>
+            {children}
+            <Footer/>
+          </Grid.Col>
+          <Grid.Col span={{base: 0, lg: 1.5}}></Grid.Col>
+        </Grid>
       </MantineProvider>
     </QueryClientProvider>
     </body>

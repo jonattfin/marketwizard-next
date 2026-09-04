@@ -45,22 +45,22 @@ export default function MarketsPerformance() {
 
 function MarketPerformanceTabs({data}: {data?: MarketPerfType}) {
   return (
-    <Tabs defaultValue="gallery">
+    <Tabs defaultValue="top-gainers">
       <Tabs.List>
-        <Tabs.Tab value="gallery" leftSection={<IconPhoto size={12}/>}>
+        <Tabs.Tab value="top-gainers" leftSection={<IconPhoto size={12}/>}>
           Top Gainers
         </Tabs.Tab>
-        <Tabs.Tab value="messages" leftSection={<IconMessageCircle size={12}/>}>
+        <Tabs.Tab value="top-losers" leftSection={<IconMessageCircle size={12}/>}>
           Top Losers
         </Tabs.Tab>
       </Tabs.List>
 
-      <Tabs.Panel value="gallery">
+      <Tabs.Panel value="top-gainers">
         <MarketPerformanceGrid data={data} />
       </Tabs.Panel>
 
-      <Tabs.Panel value="messages">
-        Messages tab content
+      <Tabs.Panel value="top-losers">
+        <MarketPerformanceGrid data={data} />
       </Tabs.Panel>
 
     </Tabs>

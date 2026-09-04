@@ -42,6 +42,5 @@ export function CustomBarChart() {
       />
       <div>&nbsp;</div>
     </>
-
   )
 }

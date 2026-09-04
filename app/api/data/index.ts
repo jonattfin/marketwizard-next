@@ -19,13 +19,13 @@ export type TopNewsType = {
 function createTopNews(indice: string): TopNewsType {
   return {
     date: "Sep 3, 2026 6:26 PM",
-    items: [
-      {source: 'C', headline: nextWords(), id: 1,},
-      {source: 'N', headline: nextWords(), id: 2,},
-      {source: 'Y', headline: nextWords(), id: 3},
-      {source: 'Ba', headline: nextWords(), id: 4,},
-      {source: 'Ce', headline: nextWords(), id: 5,},
-    ]
+    items: range(1, 10).map(i => {
+      return {
+        source: "",
+        headline: nextWords(),
+        id: i
+      }
+    })
   }
 }
 

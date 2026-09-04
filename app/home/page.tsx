@@ -8,51 +8,38 @@ import MarketPerformance from "@/app/home/components/market-performance";
 import SectorPerformance from "@/app/home/components/sector-performance";
 import TopNews from "@/app/home/components/top-news";
 import {CustomBarChart} from "@/app/home/components/composite-chart";
-import Header from "@/app/shared/header";
 import {YouTubeVideo} from "@/app/home/components/youtube-video";
-import {IndexContext} from "@/app/shared/context/index-context";
 import {useState} from "react";
 import {INDICES} from "@/app/shared/helpers";
-import Footer from "@/app/shared/footer";
+import {IndexContext} from "@/app/shared/context/index-context";
 
 export default function Home() {
   const [indice, setIndice] = useState<string>(INDICES[0])
 
   return (
-    <>
-      <IndexContext value={indice}>
-        <Grid>
-          <Grid.Col span={{base: 0, lg: 1.5}}>
-          </Grid.Col>
-          <Grid.Col span={9}>
-            <Header/>
-            <Stack>
-              <Grid>
-                <Grid.Col span={12}>
-                  <IndicesTable {...{indice, setIndice}}/>
-                  <div>&nbsp;</div>
-                  <CustomBarChart/>
-                </Grid.Col>
-              </Grid>
-              <Grid>
-                <Grid.Col span={{base: 12, lg: 9}}>
-                  <AccordionSection/>
-                </Grid.Col>
-                <Grid.Col span={{base: 12, lg: 3}}>
-                  <YouTubeVideo/>
-                  <Blockquote color="blue" cite="– Forrest Gump" icon={<IconInfoCircle/>} mt="xl">
-                    Life is like an npm install – you never know what you are going to get.
-                  </Blockquote>
-                </Grid.Col>
-              </Grid>
-              <div>&nbsp;</div>
-              <Footer/>
-            </Stack>
-          </Grid.Col>
-          <Grid.Col span={{base: 0, lg: 1.5}}></Grid.Col>
-        </Grid>
-      </IndexContext>
-    </>
+    <IndexContext value={indice}>
+    <Stack>
+      <Grid>
+        <Grid.Col span={12}>
+          <IndicesTable {...{indice, setIndice}}/>
+          <div>&nbsp;</div>
+          <CustomBarChart/>
+        </Grid.Col>
+      </Grid>
+      <Grid>
+        <Grid.Col span={{base: 12, lg: 9}}>
+          <AccordionSection/>
+        </Grid.Col>
+        <Grid.Col span={{base: 12, lg: 3}}>
+          <YouTubeVideo/>
+          <Blockquote color="blue" cite="– Forrest Gump" icon={<IconInfoCircle/>} mt="xl">
+            Life is like an npm install – you never know what you are going to get.
+          </Blockquote>
+        </Grid.Col>
+      </Grid>
+      <div>&nbsp;</div>
+    </Stack>
+    </IndexContext>
   );
 }
 
