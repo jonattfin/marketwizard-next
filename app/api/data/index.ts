@@ -21,7 +21,7 @@ function createTopNews(indice: string): TopNewsType {
     date: "Sep 3, 2026 6:26 PM",
     items: range(1, 10).map(i => {
       return {
-        source: "",
+        source: "Bloomberg",
         headline: nextWords(),
         id: i
       }

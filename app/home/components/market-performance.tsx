@@ -1,4 +1,4 @@
-import {Badge, Flex, Grid, Table, Tabs} from '@mantine/core';
+import {Badge, Flex, Grid, Splitter, Table, Tabs} from '@mantine/core';
 import PerformanceBadge from "@/app/shared/perf-badge";
 import {MarketPerfType} from '@/app/api/data'
 import {IconMessageCircle, IconPhoto} from "@tabler/icons-react";
@@ -29,11 +29,15 @@ export default function MarketsPerformance() {
   return (
     <>
       <Grid>
-        <Grid.Col span={6}>
-          <MarketPerformanceTabs data={query.data} />
-        </Grid.Col>
-        <Grid.Col span={6}>
-          <MarketPerformanceTabs data={query.data}/>
+        <Grid.Col span={12}>
+            <Splitter h={300} lineSize={20}>
+              <Splitter.Pane defaultSize={50} min={20}>
+                <MarketPerformanceTabs data={query.data} />
+              </Splitter.Pane>
+              <Splitter.Pane defaultSize={50} min={20}>
+                <MarketPerformanceTabs data={query.data} />
+              </Splitter.Pane>
+            </Splitter>
         </Grid.Col>
       </Grid>
       <Flex justify={"flex-end"}>

@@ -32,8 +32,8 @@ export default function Home() {
         </Grid.Col>
         <Grid.Col span={{base: 12, lg: 3}}>
           <YouTubeVideo/>
-          <Blockquote color="blue" cite="– Forrest Gump" icon={<IconInfoCircle/>} mt="xl">
-            Life is like an npm install – you never know what you are going to get.
+          <Blockquote color="blue" cite="– John Bogle" icon={<IconInfoCircle/>} mt="xl">
+            Don't look for the needle in the haystack. Just buy the haystack!
           </Blockquote>
         </Grid.Col>
       </Grid>

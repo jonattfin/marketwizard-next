@@ -1,4 +1,4 @@
-import {Badge, Flex, Grid, Table} from '@mantine/core';
+import {Badge, Flex, Grid, Splitter, Table} from '@mantine/core';
 import PerformanceBadge from "@/app/shared/perf-badge";
 import {SectorPerfItemType, SectorPerfType} from '@/app/api/data';
 
@@ -54,27 +54,31 @@ export default function SectorPerformance() {
   return (
     <>
       <Grid>
-        <Grid.Col span={6}>
-          <Table>
-            <Table.Thead>
-              <Table.Tr>
-                <Table.Th>Sector</Table.Th>
-                <Table.Th>Performance</Table.Th>
-              </Table.Tr>
-            </Table.Thead>
-            <Table.Tbody>{firstRows}</Table.Tbody>
-          </Table>
-        </Grid.Col>
-        <Grid.Col span={6}>
-          <Table>
-            <Table.Thead>
-              <Table.Tr>
-                <Table.Th>Sector</Table.Th>
-                <Table.Th>Performance</Table.Th>
-              </Table.Tr>
-            </Table.Thead>
-            <Table.Tbody>{secondRows}</Table.Tbody>
-          </Table>
+        <Grid.Col span={12}>
+          <Splitter h={300} lineSize={20}>
+            <Splitter.Pane defaultSize={50} min={20}>
+              <Table>
+                <Table.Thead>
+                  <Table.Tr>
+                    <Table.Th>Sector</Table.Th>
+                    <Table.Th>Performance</Table.Th>
+                  </Table.Tr>
+                </Table.Thead>
+                <Table.Tbody>{firstRows}</Table.Tbody>
+              </Table>
+            </Splitter.Pane>
+            <Splitter.Pane defaultSize={50} min={20}>
+              <Table>
+                <Table.Thead>
+                  <Table.Tr>
+                    <Table.Th>Sector</Table.Th>
+                    <Table.Th>Performance</Table.Th>
+                  </Table.Tr>
+                </Table.Thead>
+                <Table.Tbody>{secondRows}</Table.Tbody>
+              </Table>
+            </Splitter.Pane>
+          </Splitter>
         </Grid.Col>
       </Grid>
       <Flex justify={"flex-end"}>
